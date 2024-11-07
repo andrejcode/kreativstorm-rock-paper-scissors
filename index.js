@@ -1,9 +1,7 @@
-console.log('Hello, world!');
+const CHOICES = ['rock', 'paper', 'scissors'];
 
 function validateSelection(selection) {
-  const validChoices = ['rock', 'paper', 'scissors'];
-
-  if (!validChoices.includes(selection)) {
+  if (!CHOICES.includes(selection) || typeof selection !== 'string') {
     throw new Error(
       'Invalid selection! Please choose "rock", "paper", or "scissors".'
     );
@@ -13,17 +11,13 @@ function validateSelection(selection) {
 /**
  * Capitalizes the first letter of a string
  *
- * @param {string} string - The input string to be transformed.
+ * @param {string} inputString - The input string to be transformed.
  * @returns {string} - The input string with the first letter capitalized.
- *
- * @throws {TypeError} - Throws an error if the input is not a string.
  */
-function capitalizeFirstLetter(string) {
-  if (typeof string !== 'string') {
-    throw new TypeError('Input must be a string.');
-  }
-
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+function capitalizeFirstLetter(inputString) {
+  return (
+    inputString.charAt(0).toUpperCase() + inputString.slice(1).toLowerCase()
+  );
 }
 
 /**
@@ -34,11 +28,7 @@ function capitalizeFirstLetter(string) {
  * @returns {string} - A message indicating the result of the round, specifying if the player won, lost, or tied.
  */
 function playRound(playerSelection, computerSelection) {
-  //Maybe moving this block in playGame would make a batter separation of concerns
-  {
-    playerSelection = playerSelection.toLowerCase();
-    validateSelection(playerSelection);
-  }
+  validateSelection(playerSelection);
 
   const capitalizedPlayerSelection = capitalizeFirstLetter(playerSelection);
   const capitalizedComputerSelection = capitalizeFirstLetter(computerSelection);
@@ -56,11 +46,14 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// Test
-const playerSelection = 'ROcK';
-const computerSelection = 'paper';
-try {
-  console.log(playRound(playerSelection, computerSelection));
-} catch (error) {
-  console.log(error.message);
+function game() {
+  const playerSelection = 'ROcK';
+  const computerSelection = 'paper';
+  try {
+    console.log(playRound(playerSelection, computerSelection));
+  } catch (error) {
+    console.log(error.message);
+  }
 }
+
+game();
