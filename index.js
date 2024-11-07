@@ -15,8 +15,13 @@ function computerPlay() {
 function getPlayerSelection() {
   while (true) {
     const input = prompt('Enter your choice: rock, paper, or scissors');
-    const playerSelection = input.toLowerCase();
+
+    if (input === null) {
+      return null;
+    }
+
     try {
+      const playerSelection = input.toLowerCase();
       validateSelection(playerSelection);
       return playerSelection;
     } catch (error) {
@@ -62,10 +67,32 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-  const playerSelection = getPlayerSelection();
-  const computerSelection = computerPlay();
+  let playerScore = 0;
+  let computerScore = 0;
 
-  alert(playRound(playerSelection, computerSelection));
+  for (let i = 0; i < 5; i++) {
+    const playerSelection = getPlayerSelection();
+
+    if (playerSelection === null) {
+      alert('Game canceled!');
+      return; // Use break if you want to show the score after the game is canceled
+    }
+
+    const computerSelection = computerPlay();
+    const roundMessage = playRound(playerSelection, computerSelection);
+
+    if (roundMessage.includes('Won')) {
+      playerScore += 1;
+    }
+
+    if (roundMessage.includes('Lose')) {
+      computerScore += 1;
+    }
+
+    alert(roundMessage);
+  }
+
+  alert(`Player: ${playerScore} - Computer: ${computerScore}`);
 }
 
 game();
