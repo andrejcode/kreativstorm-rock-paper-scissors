@@ -8,6 +8,23 @@ function validateSelection(selection) {
   }
 }
 
+function computerPlay() {
+  return CHOICES[Math.floor(Math.random() * CHOICES.length)];
+}
+
+function getPlayerSelection() {
+  while (true) {
+    const input = prompt('Enter your choice: rock, paper, or scissors');
+    const playerSelection = input.toLowerCase();
+    try {
+      validateSelection(playerSelection);
+      return playerSelection;
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+}
+
 /**
  * Capitalizes the first letter of a string
  *
@@ -28,8 +45,6 @@ function capitalizeFirstLetter(inputString) {
  * @returns {string} - A message indicating the result of the round, specifying if the player won, lost, or tied.
  */
 function playRound(playerSelection, computerSelection) {
-  validateSelection(playerSelection);
-
   const capitalizedPlayerSelection = capitalizeFirstLetter(playerSelection);
   const capitalizedComputerSelection = capitalizeFirstLetter(computerSelection);
 
@@ -47,13 +62,10 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-  const playerSelection = 'ROcK';
-  const computerSelection = 'paper';
-  try {
-    console.log(playRound(playerSelection, computerSelection));
-  } catch (error) {
-    console.log(error.message);
-  }
+  const playerSelection = getPlayerSelection();
+  const computerSelection = computerPlay();
+
+  alert(playRound(playerSelection, computerSelection));
 }
 
 game();
