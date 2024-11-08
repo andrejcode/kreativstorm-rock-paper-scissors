@@ -30,25 +30,12 @@ function getPlayerSelection() {
   }
 }
 
-/**
- * Capitalizes the first letter of a string
- *
- * @param {string} inputString - The input string to be transformed.
- * @returns {string} - The input string with the first letter capitalized.
- */
 function capitalizeFirstLetter(inputString) {
   return (
     inputString.charAt(0).toUpperCase() + inputString.slice(1).toLowerCase()
   );
 }
 
-/**
- * Plays a round of the rock-paper-scissors game between the player and the computer.
- *
- * @param {string} playerSelection - The player's choice of "rock", "paper", or "scissors".
- * @param {string} computerSelection - The computer's choice of "rock", "paper", or "scissors".
- * @returns {string} - A message indicating the result of the round, specifying if the player won, lost, or tied.
- */
 function playRound(playerSelection, computerSelection) {
   const capitalizedPlayerSelection = capitalizeFirstLetter(playerSelection);
   const capitalizedComputerSelection = capitalizeFirstLetter(computerSelection);
@@ -75,7 +62,7 @@ function game() {
 
     if (playerSelection === null) {
       alert('Game canceled!');
-      return; // Use break if you want to show the score after the game is canceled
+      return;
     }
 
     const computerSelection = computerPlay();
