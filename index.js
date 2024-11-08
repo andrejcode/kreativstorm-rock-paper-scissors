@@ -12,9 +12,11 @@ function getComputerSelection() {
   return CHOICES[Math.floor(Math.random() * CHOICES.length)];
 }
 
-function getPlayerSelection() {
+function getPlayerSelection(roundNumber) {
   while (true) {
-    const input = prompt('Enter your choice: rock, paper, or scissors');
+    const input = prompt(
+      `Round ${roundNumber}: Choose rock, paper, or scissors`
+    );
 
     if (input === null) {
       return null;
@@ -47,21 +49,21 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === 'paper' && computerSelection === 'rock') ||
     (playerSelection === 'scissors' && computerSelection === 'paper')
   ) {
-    return `You Won! ${capitalizedPlayerSelection} beats ${capitalizedComputerSelection}`;
+    return `You win this round! ${capitalizedPlayerSelection} beats ${capitalizedComputerSelection}.`;
   } else {
-    return `You Lose! ${capitalizedComputerSelection} beats ${capitalizedPlayerSelection}`;
+    return `Computer wins this round! ${capitalizedComputerSelection} beats ${capitalizedPlayerSelection}.`;
   }
 }
 
 function getFinalScoreMessage(playerScore, computerScore) {
-  let message = `Player: ${playerScore} - Computer: ${computerScore}`;
+  let message = `Game over! Final score:\nYou: ${playerScore}\nComputer: ${computerScore}`;
 
   if (playerScore > computerScore) {
-    message += '\nYou won the game!';
-  }
-
-  if (playerScore < computerScore) {
-    message += '\nYou lost the game!';
+    message += '\nCongratulations! You won the game!';
+  } else if (playerScore < computerScore) {
+    message += '\nThe computer wins this time. Better luck next time!';
+  } else {
+    message += "\nIt's a tie! Well played by both sides.";
   }
 
   return message;
@@ -71,22 +73,30 @@ function game() {
   let playerScore = 0;
   let computerScore = 0;
 
+  alert('Welcome to Rock-Paper-Scissors!');
+  alert(
+    "You're about to face off against the computer in a 5-round match.\n" +
+      'The goal is simple: get the higher score by the end of 5 rounds!'
+  );
+  alert("Let's get started!");
+
   for (let i = 0; i < 5; i++) {
-    const playerSelection = getPlayerSelection();
+    const roundNumber = i + 1;
+    const playerSelection = getPlayerSelection(roundNumber);
 
     if (playerSelection === null) {
-      alert('Game canceled!');
+      alert('Thanks for playing! See you next time!');
       return;
     }
 
     const computerSelection = getComputerSelection();
     const roundMessage = playRound(playerSelection, computerSelection);
 
-    if (roundMessage.includes('Won')) {
+    if (roundMessage.includes('You win')) {
       playerScore += 1;
     }
 
-    if (roundMessage.includes('Lose')) {
+    if (roundMessage.includes('Computer wins')) {
       computerScore += 1;
     }
 
