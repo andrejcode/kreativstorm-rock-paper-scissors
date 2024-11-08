@@ -53,6 +53,20 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+function getFinalScoreMessage(playerScore, computerScore) {
+  let message = `Player: ${playerScore} - Computer: ${computerScore}`;
+
+  if (playerScore > computerScore) {
+    message += '\nYou won the game!';
+  }
+
+  if (playerScore < computerScore) {
+    message += '\nYou lost the game!';
+  }
+
+  return message;
+}
+
 function game() {
   let playerScore = 0;
   let computerScore = 0;
@@ -79,7 +93,8 @@ function game() {
     alert(roundMessage);
   }
 
-  alert(`Player: ${playerScore} - Computer: ${computerScore}`);
+  const finalScoreMessage = getFinalScoreMessage(playerScore, computerScore);
+  alert(finalScoreMessage);
 }
 
 game();
