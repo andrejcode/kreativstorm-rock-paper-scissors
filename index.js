@@ -8,7 +8,7 @@ function validateSelection(selection) {
   }
 }
 
-function computerPlay() {
+function getComputerSelection() {
   return CHOICES[Math.floor(Math.random() * CHOICES.length)];
 }
 
@@ -65,7 +65,7 @@ function game() {
       return;
     }
 
-    const computerSelection = computerPlay();
+    const computerSelection = getComputerSelection();
     const roundMessage = playRound(playerSelection, computerSelection);
 
     if (roundMessage.includes('Won')) {
