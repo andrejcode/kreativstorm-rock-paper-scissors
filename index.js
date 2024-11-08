@@ -72,6 +72,7 @@ function getFinalScoreMessage(playerScore, computerScore) {
 function game() {
   let playerScore = 0;
   let computerScore = 0;
+  let gameCancelled = false;
 
   alert('Welcome to Rock-Paper-Scissors!');
   alert(
@@ -85,8 +86,9 @@ function game() {
     const playerSelection = getPlayerSelection(roundNumber);
 
     if (playerSelection === null) {
-      alert('Thanks for playing! See you next time!');
-      return;
+      gameCancelled = true;
+      alert("We're sorry you're leaving.");
+      break;
     }
 
     const computerSelection = getComputerSelection();
@@ -103,8 +105,12 @@ function game() {
     alert(roundMessage);
   }
 
-  const finalScoreMessage = getFinalScoreMessage(playerScore, computerScore);
-  alert(finalScoreMessage);
+  if (!gameCancelled) {
+    const finalScoreMessage = getFinalScoreMessage(playerScore, computerScore);
+    alert(finalScoreMessage);
+  }
+
+  alert('Thanks for playing Rock-Paper-Scissors!');
 }
 
 game();
