@@ -19,7 +19,13 @@ function getPlayerSelection(roundNumber) {
     );
 
     if (input === null) {
-      return null;
+      const confirmCancel = confirm('Are you sure you want to leave the game?');
+
+      if (confirmCancel) {
+        return null;
+      }
+
+      continue;
     }
 
     try {
