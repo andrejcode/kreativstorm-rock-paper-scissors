@@ -29,7 +29,7 @@ function getPlayerSelection(roundNumber) {
     }
 
     try {
-      const playerSelection = input.toLowerCase();
+      const playerSelection = input.toLowerCase().trim();
       validateSelection(playerSelection);
       return playerSelection;
     } catch (error) {
